@@ -1,0 +1,1 @@
+export const WORDS = ['mommy', 'kissy', 'cocky', 'thong', 'lolly', 'fudge', 'weebs', 'tease', 'prank', 'silly', 'aloof', 'doozy', 'skunk', 'gnome', 'snarl', 'smite', 'poppy', 'saucy', 'vague', 'bling', 'plush', 'oomph', 'puppy',]
