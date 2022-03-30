@@ -3,6 +3,7 @@ import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
 import { InfoModal } from './components/modals/InfoModal'
 import { StatsModal } from './components/modals/StatsModal'
+import { CreateWordModal } from './components/modals/CreateWordModal'
 import { SettingsModal } from './components/modals/SettingsModal'
 import {
   WIN_MESSAGES,
@@ -22,7 +23,7 @@ import {
 import {
   isWordInWordList,
   isWinningWord,
-  solution,
+  theWord,
   findFirstUnusedReveal,
   unicodeLength,
 } from './lib/words'
@@ -41,6 +42,7 @@ import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 
 function App() {
+
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
@@ -51,6 +53,7 @@ function App() {
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isCreateWordModalOpen, setIsCreateWordModalOpen] = useState(false)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
   const [isGameLost, setIsGameLost] = useState(false)
@@ -67,16 +70,16 @@ function App() {
   const [isRevealing, setIsRevealing] = useState(false)
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
-    if (loaded?.solution !== solution) {
+    if (loaded?.theWord !== theWord) {
       return []
     }
-    const gameWasWon = loaded.guesses.includes(solution)
+    const gameWasWon = loaded.guesses.includes(theWord)
     if (gameWasWon) {
       setIsGameWon(true)
     }
     if (loaded.guesses.length === MAX_CHALLENGES && !gameWasWon) {
       setIsGameLost(true)
-      showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+      showErrorAlert(CORRECT_WORD_MESSAGE(theWord), {
         persist: true,
       })
     }
@@ -139,7 +142,10 @@ function App() {
   }
 
   useEffect(() => {
-    saveGameStateToLocalStorage({ guesses, solution })
+    if (theWord === '') {
+      return
+    }
+    saveGameStateToLocalStorage({ guesses, theWord })
   }, [guesses])
 
   useEffect(() => {
@@ -178,6 +184,7 @@ function App() {
   }
 
   const onEnter = () => {
+
     if (isGameWon || isGameLost) {
       return
     }
@@ -194,6 +201,11 @@ function App() {
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
       })
+    }
+
+    if (theWord === '') {
+      setIsCreateWordModalOpen(true)
+      return
     }
 
     // enforce hard mode - all guesses must contain all previously revealed letters
@@ -232,7 +244,7 @@ function App() {
       if (guesses.length === MAX_CHALLENGES - 1) {
         setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         setIsGameLost(true)
-        showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+        showErrorAlert(CORRECT_WORD_MESSAGE(theWord), {
           persist: true,
           delayMs: REVEAL_TIME_MS * MAX_WORD_LENGTH + 1,
         })
@@ -241,14 +253,13 @@ function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full flex flex-col">
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
-        setIsStatsModalOpen={setIsStatsModalOpen}
         setIsSettingsModalOpen={setIsSettingsModalOpen}
       />
       <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
-        <div className="pb-6 grow">
+        <div className="pb-4">
           <Grid
             guesses={guesses}
             currentGuess={currentGuess}
@@ -256,6 +267,7 @@ function App() {
             currentRowClassName={currentRowClass}
           />
         </div>
+        <div className="pb-4">
         <Keyboard
           onChar={onChar}
           onDelete={onDelete}
@@ -263,6 +275,7 @@ function App() {
           guesses={guesses}
           isRevealing={isRevealing}
         />
+        </div>
         <InfoModal
           isOpen={isInfoModalOpen}
           handleClose={() => setIsInfoModalOpen(false)}
@@ -279,6 +292,12 @@ function App() {
           isDarkMode={isDarkMode}
           isHighContrastMode={isHighContrastMode}
           numberOfGuessesMade={guesses.length}
+        />
+        <CreateWordModal
+          isOpen={isCreateWordModalOpen}
+          word={currentGuess}
+          handleClose={() => setIsCreateWordModalOpen(false)}
+          handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
         />
         <SettingsModal
           isOpen={isSettingsModalOpen}

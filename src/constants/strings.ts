@@ -1,4 +1,4 @@
-export const GAME_TITLE = 'Bongle'
+export const GAME_TITLE = 'Bongle-Custom'
 
 export const WIN_MESSAGES = ['Great Job!', 'Awesome', 'Well done!']
 export const GAME_COPIED_MESSAGE = 'Game copied to clipboard'

@@ -12,7 +12,7 @@ export const isWordInWordList = (word: string) => {
 }
 
 export const isWinningWord = (word: string) => {
-  return solution === word
+  return theWord === word
 }
 
 // build a set of previously revealed letters - present and correct
@@ -74,20 +74,39 @@ export const localeAwareUpperCase = (text: string) => {
     : text.toUpperCase()
 }
 
-export const getWordOfDay = () => {
-  // January 1, 2022 Game Epoch
-  const epochMs = 1647241200000
-  const now = Date.now()
-  const msInDay = 86400000
-  const index = Math.floor((now - epochMs) / msInDay)
-  const index2 = (index - 1)
-  const nextday = (index + 1) * msInDay + epochMs
-
-  return {
-    solution: localeAwareUpperCase(WORDS[index2]),
-    solutionIndex: index,
-    tomorrow: nextday,
-  }
+export const getWordFromURL = (code: string) => {
+  return btoa(code) 
 }
 
-export const { solution, solutionIndex, tomorrow } = getWordOfDay()
+export const getWordOfDay = () => {
+  var theWord = ''
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const word = urlParams.get('word')
+
+  if (urlParams !== null && word !== null) {
+    const decodedWord = atob(word)
+    if (decodedWord.length === 5) {
+      theWord = decodedWord
+    }
+  }
+
+  return { theWord }
+
+  // // January 1, 2022 Game Epoch
+  // const epochMs = 1647241200000
+  // const now = Date.now()
+  // const msInDay = 86400000
+  // const index = Math.floor((now - epochMs) / msInDay)
+  // const index2 = (index - 1)
+  // const nextday = (index + 1) * msInDay + epochMs
+
+  // return {
+  //   solution: localeAwareUpperCase(WORDS[index2]),
+  //   solutionIndex: index,
+  //   tomorrow: nextday,
+  // }
+}
+
+export const { theWord } = getWordOfDay()

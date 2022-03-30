@@ -2,6 +2,7 @@ import { MAX_CHALLENGES } from '../../constants/settings'
 import { CompletedRow } from './CompletedRow'
 import { CurrentRow } from './CurrentRow'
 import { EmptyRow } from './EmptyRow'
+import { theWord } from '../../lib/words'
 
 type Props = {
   guesses: string[]
@@ -16,10 +17,23 @@ export const Grid = ({
   isRevealing,
   currentRowClassName,
 }: Props) => {
-  const empties =
-    guesses.length < MAX_CHALLENGES - 1
-      ? Array.from(Array(MAX_CHALLENGES - 1 - guesses.length))
-      : []
+  var empties
+
+
+  if (theWord !== '') {
+    if (guesses.length < MAX_CHALLENGES - 1) {
+        empties = Array.from(Array(MAX_CHALLENGES - 1 - guesses.length))
+      } else { 
+        empties = []
+      }
+  } else {
+    empties = []
+  }
+  
+
+
+  
+    
 
   return (
     <>

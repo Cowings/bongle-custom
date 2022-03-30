@@ -1,6 +1,5 @@
 import { getGuessStatuses } from './statuses'
-import { solutionIndex, unicodeSplit } from './words'
-import { GAME_TITLE } from '../constants/strings'
+import { unicodeSplit } from './words'
 import { MAX_CHALLENGES } from '../constants/settings'
 import { UAParser } from 'ua-parser-js'
 
@@ -17,10 +16,11 @@ export const shareStatus = (
   isHighContrastMode: boolean,
   handleShareToClipboard: () => void
 ) => {
+  const decoded = 'https://custom.bongbong.com/?word=' + btoa(guesses[guesses.length - 1]) + `\n\n`
   const textToShare =
-    `${GAME_TITLE} ${solutionIndex} ${
+    `Bongle Custom ${
       lost ? 'X' : guesses.length
-    }/${MAX_CHALLENGES}${isHardMode ? '*' : ''}\n\n` +
+    }/${MAX_CHALLENGES}${isHardMode ? '*' : ''}\n` + decoded +
     generateEmojiGrid(guesses, getEmojiTiles(isDarkMode, isHighContrastMode))
 
   const shareData = { text: textToShare }
