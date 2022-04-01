@@ -7,6 +7,40 @@ type Props = {
 }
 
 export const InfoModal = ({ isOpen, handleClose }: Props) => {
+  var theWord = ''
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const word = urlParams.get('word')
+  
+  if (urlParams !== null && word !== null) {
+    const decodedWord = atob(word)
+    if (decodedWord.length === 5) {
+      theWord = decodedWord
+    }
+  }
+
+  if (theWord === '') {
+    return (
+      <BaseModal title="Create a word" isOpen={isOpen} handleClose={handleClose}>
+      <p className="text-sm text-gray-500 dark:text-gray-300">
+        Type any 5 letter word of your choice and press enter. You can then share the link with your friends or go to the link and hand your friend the device. Have Fun!
+      </p>
+
+
+      <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
+        Bongle is created by tbong, go check out my website -{' '}
+        <a
+          href="https://bongbong.com/"
+          className="underline font-bold"
+        >
+          click here
+        </a>{' '}
+      </p>
+    </BaseModal>
+    )
+  }
+
   return (
     <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
