@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+a, a:focus{
+  color: inherit;
+  border: inherit;
+  outline:none;
+} 
+a:link{
+  text-decoration: none;
+}
+
 :root {
   --animation-speed: 1000ms;
   --animation-speed-fast: 250ms;
