@@ -25,11 +25,33 @@ export const StatsModal = ({
   handleClose,
   guesses,
   isGameLost,
+  isGameWon,
   handleShareToClipboard,
   isHardMode,
   isDarkMode,
   isHighContrastMode,
 }: Props) => {
+  if (!isGameLost && !isGameWon) {
+    return (
+      <BaseModal
+        title='Bongle Custom'
+        isOpen={isOpen}
+        handleClose={handleClose}
+      >
+
+        <button
+            type="button"
+            className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            onClick={() => {
+              window.location.href = 'https://custom.bongbong.com/';
+          }}
+        >
+          Make Your Own Word
+        </button>
+      </BaseModal>
+    )
+  }
+
   if (isGameLost) {
     return (
       <BaseModal
