@@ -3,7 +3,7 @@ import {
   CogIcon,
   InformationCircleIcon,
   ArrowCircleLeftIcon,
-  ThumbUpIcon
+  HeartIcon
 } from '@heroicons/react/outline'
 import { GAME_TITLE } from '../../constants/strings'
 
@@ -36,7 +36,7 @@ export const Navbar = ({
       
         <p className="text-xl ml-2.5 font-bold dark:text-white">{GAME_TITLE}</p>
         <div className="right-icons">
-        <ThumbUpIcon
+        <HeartIcon
             className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
             onClick={() => setIsHeartModalOpen(true)}
           />
