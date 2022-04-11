@@ -86,6 +86,10 @@ svg.cursor-pointer:hover {
   justify-content: space-between;
 }
 
+.left-icons {
+  display: flex;
+}
+
 .right-icons {
   display: flex;
 }

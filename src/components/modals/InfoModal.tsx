@@ -26,17 +26,6 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       <p className="text-sm text-gray-500 dark:text-gray-300">
         Type any 5 letter word of your choice and press enter. You can then share the link with your friends or go to the link and hand your friend the device. Have Fun!
       </p>
-
-
-      <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
-        Bongle is created by tbong, go check out my website -{' '}
-        <a
-          href="https://bongbong.com/"
-          className="underline font-bold"
-        >
-          click here
-        </a>{' '}
-      </p>
     </BaseModal>
     )
   }
@@ -89,16 +78,6 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
         The letter U is not in the word in any spot.
-      </p>
-
-      <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
-        Bongle is created by tbong, go check out my website -{' '}
-        <a
-          href="https://bongbong.com/"
-          className="underline font-bold"
-        >
-          click here
-        </a>{' '}
       </p>
     </BaseModal>
   )

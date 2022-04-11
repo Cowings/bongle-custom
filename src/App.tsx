@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
+import { HeartModal } from './components/modals/HeartModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { CreateWordModal } from './components/modals/CreateWordModal'
@@ -50,6 +51,7 @@ function App() {
     useAlert()
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
+  const [isHeartModalOpen, setIsHeartModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isCreateWordModalOpen, setIsCreateWordModalOpen] = useState(false)
@@ -254,6 +256,7 @@ function App() {
   return (
     <div className="h-full flex flex-col">
       <Navbar
+        setIsHeartModalOpen={setIsHeartModalOpen}
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}
         setIsSettingsModalOpen={setIsSettingsModalOpen}
@@ -276,6 +279,10 @@ function App() {
           isRevealing={isRevealing}
         />
         </div>
+        <HeartModal
+          isOpen={isHeartModalOpen}
+          handleClose={() => setIsHeartModalOpen(false)}
+        />
         <InfoModal
           isOpen={isInfoModalOpen}
           handleClose={() => setIsInfoModalOpen(false)}
