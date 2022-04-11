@@ -16,7 +16,7 @@ export const shareStatus = (
   isHighContrastMode: boolean,
   handleShareToClipboard: () => void
 ) => {
-  const decoded = 'https://custom.bongbong.com/?word=' + btoa(guesses[guesses.length - 1]) + `\n\n`
+  const decoded = 'https://bongbong.com/games/bongle-custom/?word=' + btoa(guesses[guesses.length - 1]) + `\n\n`
   const textToShare =
     `Bongle Custom ${
       lost ? 'X' : guesses.length

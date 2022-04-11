@@ -40,7 +40,7 @@ export const CreateWordModal = ({
             className="mt-2 w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
             onClick={() => {
               var encodedString = btoa(word);
-              window.location.href = `https://custom.bongbong.com/?word=` + encodedString;
+              window.location.href = `https://bongbong.com/games/bongle-custom/?word=` + encodedString;
             }}
           >
             Go To Link

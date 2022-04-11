@@ -10,7 +10,7 @@ export const shareLink = (
   handleShareToClipboard: () => void
 ) => {
   var encodedString = btoa(word);
-  const textToShare = `https://custom.bongbong.com/?word=` + encodedString
+  const textToShare = `https://bongbong.com/games/bongle-custom/?word=` + encodedString
 
   const shareData = { text: textToShare }
 
