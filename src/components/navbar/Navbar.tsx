@@ -1,5 +1,5 @@
 import {
-  ChartBarIcon,
+  PencilIcon,
   CogIcon,
   InformationCircleIcon,
   ArrowCircleLeftIcon,
@@ -40,7 +40,7 @@ export const Navbar = ({
             className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
             onClick={() => setIsHeartModalOpen(true)}
           />
-          <ChartBarIcon
+          <PencilIcon
             className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
             onClick={() => setIsStatsModalOpen(true)}
           />
