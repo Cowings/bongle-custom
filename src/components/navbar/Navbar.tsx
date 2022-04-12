@@ -26,7 +26,7 @@ export const Navbar = ({
         <div className="left-icons">
           <ArrowCircleLeftIcon
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => window.location.href = `https://bongbong.com/games/`}
+          onClick={() => window.location.href = `https://www.bongbong.com/games/`}
         />
         <InformationCircleIcon
           className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
